@@ -1,7 +1,7 @@
 /**
  * ImageModal - класс обработки данных изображения и выведения их в модальное окно
  */
-class ImageModal {
+export class ImageModal {
     constructor() {
         this._imageInfoContainer = document.querySelector("#imageModal .current-image-info");
         this._imgTag = document.querySelector(".current-image img");

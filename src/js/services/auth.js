@@ -1,4 +1,5 @@
-class AuthService {
+import {env} from './../config/env';
+export class AuthService {
     login(email, password) {
         return new Promise((resolve, reject) => {
             fetch(`${env.apiUrl}/public/auth/login`, {

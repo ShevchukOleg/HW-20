@@ -1,10 +1,15 @@
+import {env} from './../config/env';
+import {ImageService} from './../services/image';
+import {ImageModal} from './../ui/imageModal';
+const imageModal = new ImageModal();
+const imageService = new ImageService();
+// import {}
 /**
  * UserService - контроллер обратотки информации пользователя
  * @class 
  * 
  */
-
-class UserService {
+export class UserService {
 
     /**
      * Запрос на получение данных о пользователе
@@ -37,8 +42,6 @@ class UserService {
             // Get user id
             const id = localStorage.getItem("social_user_id");
 
-            if (!token || !id) return reject("Error. Unauthorized.");
-
             fetch(`${env.apiUrl}/public/users/upload-cover/${id}`, {
                 method: "POST",
                 body: formData,
@@ -63,8 +66,6 @@ class UserService {
 
             const token = localStorage.getItem("social_user_token");
             const id = localStorage.getItem("social_user_id");
-
-            if (!token || !id) return reject("Error. User  did not authorize.");
             
             fetch(`${env.apiUrl}/public/users/upload-photos/${id}`, {
                 method: 'POST',
@@ -111,6 +112,25 @@ class UserService {
             .catch((error) => reject(error.message));
         });
     };
+
+    sendSearchQuery(query){
+        return new Promise((resolve, reject) => {
+            const token = localStorage.getItem("social_user_token");
+            fetch(`${env.apiUrl}/public/users/search-users`, {
+              method: "POST",
+              body: JSON.stringify({
+                  search_text: `${query}`
+              }),
+              headers: {
+                  "x-access-token": token,
+                  "Content-type": "application/json"
+              }
+            })
+            .then(response => response.json())
+            .then((data) => resolve(data))
+            .catch((error) => reject(error.message));
+        })
+    }
     /**
      * sendNewComment - метод отправки нового сообщения
      * @param {string} imageId - идентификатор изображения

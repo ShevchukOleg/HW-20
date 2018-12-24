@@ -1,8 +1,10 @@
+import {SearchPanel} from './searchPanel';
+const searchPanel = new SearchPanel();
 /**
  * UserUI - класс отображения информации пользователя
  * 
  */
-class UserUI {
+export class UserUI {
     /**
      * конструктор определяющий елементы интерфкйса для вывода информации пользователя
      */
@@ -22,7 +24,17 @@ class UserUI {
         this.setCover(cover);
         this.setAvatar(avatar);
         this.setName(full_name);
-    }
+    };
+
+    controllerSearchingUserInfo(userData){
+        if(userData.length > 0) {
+            searchPanel.clearPanel();
+            userData.forEach((searchingUserInfo) => searchPanel.setSearchingUserInfo(searchingUserInfo));
+        } else {
+            searchPanel.clearPanel();
+            searchPanel.noUserMassege();
+        }
+    };
 
     /**
      * setCover - метод замены фона
@@ -30,7 +42,7 @@ class UserUI {
      */
     setCover(url) {
         this._cover.style.background = `url("${url}") no-repeat center / cover`;
-    }
+    };
 
     /**
      * setAvatar - метод который изменяет аватар, создает место для отображения
@@ -41,7 +53,7 @@ class UserUI {
         const template = `<img src="${url}" alt="">`;
         this._userAvatar.innerHTML = "";
         this._userAvatar.insertAdjacentHTML("afterbegin", template);
-    }
+    };
 
     /**
      * setName -  вставка имени пользователя на страницу
@@ -50,5 +62,5 @@ class UserUI {
 
     setName(name) {
         this._userName.textContent = name;
-    }
+    };
 }
