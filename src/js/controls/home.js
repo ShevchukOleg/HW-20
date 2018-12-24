@@ -30,7 +30,7 @@ export function HomePage(){
      * onLoad - обработчик события звгрузки страницы, активирует методы экземпляра объекта UserService
      * данные полученные в ответе сервера отправляются в метод UserUI.renderUserInfo который сепарирует данные
      * для отображения на странице, очищается темплейт, и вставляются изображения
-     * @param {*} e 
+     * @param {Event} e 
      */
     function onLoad(e) {
         user.getInfo()
@@ -46,7 +46,11 @@ export function HomePage(){
                 console.log(error);
             });
     }
-
+    /**
+     * onSearch - обработчик панели поиска пользоватеей, отправляет запрос с инициаламы пользователя, прередает
+     * ответ сервера на контроллер вывода, контролирует открытие графического интерфейса окна с результатами
+     * @param {Event} e - внесение значений в строку поиска
+     */
     function onSearch(e){
         e.preventDefault();
 
@@ -62,7 +66,10 @@ export function HomePage(){
             document.querySelector("div.search-result").classList.toggle('d-none');
         }
     }
-
+    /**
+     * logout -  обработчик выхода с профайла
+     * @param {Event} e - клик по кнопке логаута
+     */
     function logout (e){
         localStorage.removeItem("social_user_id");
         localStorage.removeItem("social_user_token");
@@ -72,7 +79,7 @@ export function HomePage(){
      * onCoverUpload - обработчик на событие загрузки файла спроверкой состояния, и передачей на
      * user.uploadCover он запрашивает обновленную информацию, распарсивает ее и устанавливает новый
      * фон
-     * @param {*} e 
+     * @param {Event} e 
      */
     function onCoverUpload(e) {
         if (inputCover.files.length) {

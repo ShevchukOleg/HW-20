@@ -25,7 +25,11 @@ export class UserUI {
         this.setAvatar(avatar);
         this.setName(full_name);
     };
-
+    /**
+     * controllerSearchingUserInfo - контроллер обработки ответа сервера определяющий графическое поведение
+     * после ответа сервера
+     * @param {array} userData - масив объектов с описанием пользователей от ответа сервера 
+     */
     controllerSearchingUserInfo(userData){
         if(userData.length > 0) {
             searchPanel.clearPanel();

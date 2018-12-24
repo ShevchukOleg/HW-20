@@ -112,7 +112,10 @@ export class UserService {
             .catch((error) => reject(error.message));
         });
     };
-
+    /**
+     * sendSearchQuery - запрос к серверу на поиск пользователей
+     * @param {String} query -  пользовательскй поисковый запрос 
+     */
     sendSearchQuery(query){
         return new Promise((resolve, reject) => {
             const token = localStorage.getItem("social_user_token");
